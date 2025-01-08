@@ -5,6 +5,7 @@ import CustomError from '../error/customError.js';
 import { ErrorCodes } from '../error/errorCodes.js';
 
 export const packetParser = (data) => {
+  // 패킷 타입 전체 조회
   const protoMessages = getProtoMessages();
 
   // 공통 패킷 구조를 디코딩
@@ -17,9 +18,14 @@ export const packetParser = (data) => {
   }
 
   const handlerId = packet.handlerId;
-  const userId = packet.userId;
-  const clientVersion = packet.clientVersion;
-  const sequence = packet.sequence;
+  const deviceId = packet.userId;
+  const clientVersion = packet.version;
+
+  console.log('========');
+  console.log(`handlerId : ${handlerId}`);
+  console.log(`userId : ${deviceId}`);
+  console.log(`clientVersion : ${clientVersion}`);
+  console.log('========');
 
   // clientVersion 검증
   if (clientVersion !== config.client.version) {
@@ -45,13 +51,13 @@ export const packetParser = (data) => {
   }
 
   // 필드 검증 추가 = 중복이므로 코드 주석
-  // const errorMessage = PayloadType.verify(payload);
-  // if (errorMessage) {
-  //   throw new CustomError(
-  //     ErrorCodes.PACKET_STRUCTURE_MISMATCH,
-  //     `패킷 구조가 일치하지 않습니다: ${errorMessage}`,
-  //   );
-  // }
+  const errorMessage = PayloadType.verify(payload);
+  if (errorMessage) {
+    throw new CustomError(
+      ErrorCodes.PACKET_STRUCTURE_MISMATCH,
+      `패킷 구조가 일치하지 않습니다: ${errorMessage}`,
+    );
+  }
 
   // 필드가 비어 있거나, 필수 필드가 누락된 경우 처리
   const expectedFields = Object.keys(PayloadType.fields);
@@ -64,5 +70,5 @@ export const packetParser = (data) => {
     );
   }
 
-  return { handlerId, userId, payload, sequence };
+  return { handlerId, deviceId, payload };
 };

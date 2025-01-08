@@ -3,7 +3,7 @@ import { addGameSession } from '../../session/game.session.js';
 import { createResponse } from '../../utils/response/createResponse.js';
 import { handlerError } from '../../utils/error/errorHandler.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
-import { getUserById } from '../../session/user.session.js';
+import { getUserByDeviceId } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
@@ -12,7 +12,7 @@ const createGameHandler = ({ socket, userId, payload }) => {
     const gameId = uuidv4();
     const gameSession = addGameSession(gameId);
 
-    const user = getUserById(userId);
+    const user = getUserByDeviceId(userId);
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }

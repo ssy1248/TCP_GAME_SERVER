@@ -1,6 +1,6 @@
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 import { getGameSession, getAllGameSessions } from '../../session/game.session.js';
-import { getUserById } from '../../session/user.session.js';
+import { getUserByDeviceId } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 import { handlerError } from '../../utils/error/errorHandler.js';
@@ -15,7 +15,7 @@ const joinGameHandler = ({ socket, userId, payload }) => {
       throw new CustomError(ErrorCodes.GAME_NOT_FOUND, '게임 세션을 찾을 수 없습니다.');
     }
 
-    const user = getUserById(userId);
+    const user = getUserByDeviceId(userId);
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }

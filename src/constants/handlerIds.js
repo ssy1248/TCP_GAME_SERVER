@@ -4,5 +4,5 @@ export const HANDLER_IDS = {
     INITIAL: 0,
     CREATE_GAME: 4,
     JOIN_GAME: 5,
-    UPDATE_LOCATION: 6,
+    UPDATE_LOCATION: 2,
 }

@@ -1,18 +1,30 @@
 import { createPingPacket } from '../../utils/notification/game.notification.js';
 
 class User {
-  constructor(id, socket) {
+  constructor(id, socket, deviceId, playerId, latency, lastX, lastY) {
     this.id = id;
     this.socket = socket;
-    this.x = 0;
-    this.y = 0;
-    this.sequence = 0;
+    this.deviceId = deviceId;
+    this.playerId = playerId;
+    this.latency = latency;
+    this.x = lastX;
+    this.y = lastY;
+    
+    this.startTime = Date.now();
     this.lastUpdateTime = Date.now();
+
+    this.lastX = 0;
+    this.lastY = 0;
+    this.speed = 3;
   }
 
   updatePosition(x, y) {
+    this.lastX = this.x;
+    this.lastY = this.y;
+
     this.x = x;
     this.y = y;
+
     this.lastUpdateTime = Date.now();
   }
 
@@ -34,13 +46,21 @@ class User {
   }
 
   calculatePosition(latency) {
-    const timeDiff = latency / 1000; // 초 단위
-    const speed = 1;
-    const distance = speed * timeDiff;
+    if(this.x === this.lastX && this.y === this.lastY) {
+      return {
+        x: this.x,
+        y: this.y,
+      };
+    }
+
+    const timeDiff = (Date.now() - this.lastUpdateTime + latency) / 1000; // 초 단위
+    const distance = this.speed * timeDiff;
+    const direcitonX = this.x !== this.lastX ? Math.sign(this.x - this.lastX) : 0;
+    const direcitonY = this.y !== this.lastY ? Math.sign(this.y - this.lastY) : 0;
 
     return {
-      x: this.x + distance,
-      y: this.y,
+      x: this.x + direcitonX * distance,
+      y: this.y + direcitonY * distance,
     };
   }
 }

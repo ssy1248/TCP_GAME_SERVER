@@ -20,3 +20,7 @@ export const DB2_PASSWORD = process.env.DB2_PASSWORD || 'password2';
 export const DB2_HOST = process.env.DB2_HOST || 'localhost';
 export const DB2_PORT = process.env.DB2_PORT || 3306;
 
+export const GAME_ID = 'game1';
+export const DEFAULT_X = 0;
+export const DEFAULT_Y = 0;
+

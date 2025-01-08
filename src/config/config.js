@@ -1,4 +1,4 @@
-import { PORT, HOST, CLIENT_VERSION } from '../constants/env.js';
+import { PORT, HOST, CLIENT_VERSION, GAME_ID, DEFAULT_X, DEFAULT_Y } from '../constants/env.js';
 import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants/header.js';
 import {
   DB1_NAME,
@@ -24,6 +24,11 @@ export const config = {
   packet: {
     totalLength: TOTAL_LENGTH,
     typeLength: PACKET_TYPE_LENGTH,
+  },
+  game: {
+    gameId: GAME_ID,
+    defaultX: DEFAULT_X,
+    defaultY: DEFAULT_Y,
   },
   databases: {
     GAME_DB: {
