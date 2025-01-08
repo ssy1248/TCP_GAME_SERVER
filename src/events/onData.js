@@ -9,7 +9,6 @@ import { ErrorCodes } from '../utils/error/errorCodes.js';
 import { getProtoMessages } from '../init/loadProtos.js';
 
 export const onData = (socket) => async (data) => {
-  console.log('On Data : ', data);
   // 기존 버퍼에 새로 수신된 데이터를 추가
   socket.buffer = Buffer.concat([socket.buffer, data]);
 

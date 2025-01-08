@@ -4,6 +4,8 @@ import { config } from '../../config/config.js';
 import CustomError from '../error/customError.js';
 import { ErrorCodes } from '../error/errorCodes.js';
 
+//https://github.com/devbong92/sparta-multi-game/blob/main/src/handlers/user/initial.handler.js
+
 export const packetParser = (data) => {
   // 패킷 타입 전체 조회
   const protoMessages = getProtoMessages();
@@ -20,6 +22,10 @@ export const packetParser = (data) => {
   const handlerId = packet.handlerId;
   const deviceId = packet.userId;
   const clientVersion = packet.version;
+
+  //핸들러 id도 누락이 된건가? -> 0번인 이유가? -> INITIAL이라서 0?
+  //공통 패킷 구조 -> payload가 누락되는 현상이 일어나는 거 같음
+  console.log('공통 패킷 구조 : ', packet);
 
   console.log('========');
   console.log(`handlerId : ${handlerId}`);
@@ -46,6 +52,7 @@ export const packetParser = (data) => {
   let payload;
   try {
     payload = PayloadType.decode(packet.payload);
+    console.log('디코딩 된 페이로드 : ', payload);
   } catch (error) {
     throw new CustomError(ErrorCodes.PACKET_STRUCTURE_MISMATCH, '패킷 구조가 일치하지 않습니다.');
   }
@@ -62,6 +69,8 @@ export const packetParser = (data) => {
   // 필드가 비어 있거나, 필수 필드가 누락된 경우 처리
   const expectedFields = Object.keys(PayloadType.fields);
   const actualFields = Object.keys(payload);
+  console.log('필드1 : ', expectedFields);
+  console.log('필드2 : ', actualFields);
   const missingFields = expectedFields.filter((field) => !actualFields.includes(field));
   if (missingFields.length > 0) {
     throw new CustomError(

@@ -10,7 +10,9 @@ const initialHandler = async ({ socket, userId, payload }) => {
   try {
     const { deviceId, playerId, latency } = payload;
 
-    //MYSQL.user 테이블에서 deviceId를 통해서 유저 조회회
+    console.log('[ initial ] deviceId  payload =>>> ', deviceId, payload);
+
+    //MYSQL.user 테이블에서 deviceId를 통해서 유저 조회
     let user = await findUserByDeviceId(deviceId);
 
     let lastX = config.game.defaultX;
@@ -30,7 +32,7 @@ const initialHandler = async ({ socket, userId, payload }) => {
     }
 
     //(id, socket, deviceId, playerId, latency, lastX, lastY)
-    let player = addUser(user.id, socket, deviceId, playerId, latency, lastX, lastY);
+    let player = addUser(socket, user.id, user.deviceId, playerId, latency, lastX, lastY);
 
     const gameSession = getGameSession(config.game.gameId);
     gameSession.addUser(player);
