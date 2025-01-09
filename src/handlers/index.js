@@ -9,7 +9,7 @@ import initialHandler from './user/initial.handler.js';
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
     handler: initialHandler,
-    protoType: 'initial.InitialPayload',
+    protoType: 'initial.InitialPacket',
   },
   [HANDLER_IDS.CREATE_GAME]: {
     handler: createGameHandler,

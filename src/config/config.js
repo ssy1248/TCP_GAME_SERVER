@@ -1,4 +1,3 @@
-import { PORT, HOST, CLIENT_VERSION, GAME_ID, DEFAULT_X, DEFAULT_Y } from '../constants/env.js';
 import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants/header.js';
 import {
   DB1_NAME,
@@ -11,6 +10,12 @@ import {
   DB2_PASSWORD,
   DB2_HOST,
   DB2_PORT,
+  PORT, 
+  HOST, 
+  CLIENT_VERSION,
+  GAME_ID, 
+  DEFAULT_X, 
+  DEFAULT_Y 
 } from '../constants/env.js';
 
 export const config = {

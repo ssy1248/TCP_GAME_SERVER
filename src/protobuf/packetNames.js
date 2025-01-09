@@ -4,7 +4,7 @@ export const packetNames = {
     Ping: 'common.Ping',
   },
   initial: {
-    InitialPayload: 'initial.InitialPayload',
+    InitialPacket: 'initial.InitialPayload',
   },
   game: {
     CreateGamePayload: 'game.CreateGamePayload',

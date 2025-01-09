@@ -6,6 +6,7 @@ import pools from '../database.js';
 import { SQL_QUERIES } from './user.querires.js';
 import { v4 as uuidv4 } from 'uuid';
 
+// deviceId를 통해 user 테이블 조회
 export const findUserByDeviceId = async (deviceId) => {
   const [rows] = await pools.USER_DB.query(SQL_QUERIES.FIND_USER_BY_DEVICE_ID, [deviceId]);
   return toCamelCase(rows[0]);
