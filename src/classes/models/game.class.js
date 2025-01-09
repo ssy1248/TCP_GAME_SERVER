@@ -1,7 +1,10 @@
-import { createLocationPacket, gameStartNotification } from '../../utils/notification/game.notification.js';
+import {
+  createLocationPacket,
+  gameStartNotification,
+} from '../../utils/notification/game.notification.js';
 import IntervalManager from '../managers/interval.manager.js';
 
-const MAX_PLAYERS = 2;
+const MAX_PLAYERS = 4;
 
 class Game {
   constructor(id) {
@@ -18,11 +21,11 @@ class Game {
     this.users.push(user);
 
     this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000);
-    if (this.users.length === MAX_PLAYERS) {
-      setTimeout(() => {
-        this.startGame();
-      }, 3000);
-    }
+    // if (this.users.length === MAX_PLAYERS) {
+    //   setTimeout(() => {
+    //     this.startGame();
+    //   }, 3000);
+    // }
   }
 
   getUser(userId) {
@@ -38,6 +41,7 @@ class Game {
     }
   }
 
+  // 최대 레이턴시 값 조회
   getMaxLatency() {
     let maxLatency = 0;
     this.users.forEach((user) => {
@@ -57,13 +61,22 @@ class Game {
     });
   }
 
-  getAllLocation() {
+  getAllLocation(userId) {
     const maxLatency = this.getMaxLatency();
 
-    const locationData = this.users.map((user) => {
-      const { x, y } = user.calculatePosition(maxLatency);
-      return { id: user.id, x, y };
+    // const locationData = this.users.map((user) => {
+    //   const { x, y } = user.calculatePosition(maxLatency);
+    //   return { id: user.id, x, y };
+    // });
+
+    const locationData = [];
+    this.users.forEach((user) => {
+      if (user.id !== userId) {
+        const { x, y } = user.calculatePosition(maxLatency);
+        locationData.push({ id: user.od, playerId: user.playerId, x, y });
+      }
     });
+
     return createLocationPacket(locationData);
   }
 }
