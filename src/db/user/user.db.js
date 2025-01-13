@@ -12,16 +12,19 @@ export const findUserByDeviceId = async (deviceId) => {
   return toCamelCase(rows[0]);
 };
 
+// 유저 생성
 export const createUser = async (deviceId) => {
   const id = uuidv4();
   await pools.USER_DB.query(SQL_QUERIES.CREATE_USER, [id, deviceId]);
   return { id, deviceId };
 };
 
+// last_login 업데이트
 export const updateUserLogin = async (id) => {
   await pools.USER_DB.query(SQL_QUERIES.UPDATE_USER_LOGIN, [id]);
 };
 
+// game_end 데이터 입력
 export const gameEnd = async (user) => {
   console.log('gameEnd : ', user);
 
@@ -39,6 +42,7 @@ export const gameEnd = async (user) => {
   ]);
 }
 
+// game_end 테이블에서 가장 최근 유저 데이터 가져오기
 export const findLastGameEndByUserId = async (userId) => {
   const [rows] = await pools.USER_DB.query(SQL_QUERIES.FIND_LAST_GAME_END_BY_USER_ID, [userId]);
   return toCamelCase(rows[0]);

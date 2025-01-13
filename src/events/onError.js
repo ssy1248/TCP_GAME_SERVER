@@ -1,11 +1,16 @@
 import { removeUser } from "../session/user.session.js";
-import CustomError from "../utils/error/customError.js";
-import { handlerError } from "../utils/error/errorHandler.js";
+import { gameEnd } from "../db/user/user.db.js";
+import { config } from "../config/config.js";
+import { getGameSession } from "../session/game.session.js";
 
-export const onError = (socket) => (err) => {
+export const onError = (socket) => async (err) => {
   console.error('Socket error:', err);
-  handlerError(socket, new CustomError(500, `소켓 오류: ${err.message}`));
-
-  // 세션에서 유저 삭제
-  removeUser(socket);
+   // 세션에서 유저 삭제
+    const removedUser = removeUser(socket);
+  
+    // 게임 종료 시 유저 위치 저장
+    await gameEnd(removedUser);
+  
+    // 게임 세션 삭제제
+    getGameSession(config.gameId).removeUser(removedUser.id);
 };

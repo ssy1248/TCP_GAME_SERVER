@@ -21,11 +21,6 @@ class Game {
     this.users.push(user);
 
     this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000);
-    // if (this.users.length === MAX_PLAYERS) {
-    //   setTimeout(() => {
-    //     this.startGame();
-    //   }, 3000);
-    // }
   }
 
   getUser(userId) {
@@ -62,18 +57,14 @@ class Game {
   }
 
   getAllLocation(userId) {
+    // 최대 레이턴시 값 계산
     const maxLatency = this.getMaxLatency();
-
-    // const locationData = this.users.map((user) => {
-    //   const { x, y } = user.calculatePosition(maxLatency);
-    //   return { id: user.id, x, y };
-    // });
 
     const locationData = [];
     this.users.forEach((user) => {
       if (user.id !== userId) {
         const { x, y } = user.calculatePosition(maxLatency);
-        locationData.push({ id: user.od, playerId: user.playerId, x, y });
+        locationData.push({ id: user.id, playerId: user.playerId, x, y });
       }
     });
 

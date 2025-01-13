@@ -18,6 +18,8 @@ import {
   DEFAULT_Y 
 } from '../constants/env.js';
 
+// 중앙 집중식 관리
+
 export const config = {
   server: {
     port: PORT,

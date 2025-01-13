@@ -10,7 +10,7 @@ const initialHandler = async ({ socket, userId, payload }) => {
   try {
     const { deviceId, playerId, latency } = payload;
 
-    console.log('[ initial ] deviceId  payload =>>> ', deviceId, payload);
+    console.log('[initial] deviceId, payload =>>> ', deviceId, payload);
 
     //MYSQL.user 테이블에서 deviceId를 통해서 유저 조회
     let user = await findUserByDeviceId(deviceId);
@@ -19,8 +19,10 @@ const initialHandler = async ({ socket, userId, payload }) => {
     let lastY = config.game.defaultY;
 
     if (!user) {
+      // 등록된 유저가 없다면 유저 생성
       user = await createUser(deviceId);
     } else {
+      // 유저의 마지막 로그인 업데이트
       await updateUserLogin(user.id);
     }
 

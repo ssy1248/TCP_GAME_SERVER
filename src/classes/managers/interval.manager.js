@@ -28,6 +28,7 @@ class IntervalManager extends BaseManager {
       const userIntervals = this.intervals.get(playerId);
       userIntervals.forEach((intervalId) => clearInterval(intervalId));
       this.intervals.delete(playerId);
+      clearInterval(this.intervals.playerId);
     }
   }
 

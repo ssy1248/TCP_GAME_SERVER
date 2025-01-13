@@ -26,7 +26,7 @@ export const onData = (socket) => async (data) => {
     if (socket.buffer.length >= length) {
       
       if (packetType !== PACKET_TYPE.PING) {
-        console.log(`### [ onData : IF ] length: ${length}, packetType: ${packetType}`);
+        console.log(`### [ onData ] length: ${length}, packetType: ${packetType}`);
       }
 
       // 패킷 데이터를 자르고 버퍼에서 제거
