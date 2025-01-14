@@ -4,14 +4,14 @@ import {
 } from '../../utils/notification/game.notification.js';
 import IntervalManager from '../managers/interval.manager.js';
 
-const MAX_PLAYERS = 4;
+const MAX_PLAYERS = 500;
 
 class Game {
   constructor(id) {
     this.id = id;
     this.users = [];
     this.intervalManager = new IntervalManager();
-    this.state = 'wating'; //wating, in{rogress
+    this.state = 'wating'; //wating, inprogress
   }
 
   addUser(user) {

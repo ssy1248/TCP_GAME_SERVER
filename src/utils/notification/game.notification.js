@@ -4,7 +4,7 @@ import { config } from '../../config/config.js';
 import { PACKET_TYPE } from '../../constants/header.js';
 import { getProtoMessages } from '../../init/loadProtos.js';
 
-//공용
+// 공용 패킷 생성 => 헤더 + 타입
 const makeNotification = (message, type) => {
   const packetLength = Buffer.alloc(config.packet.totalLength);
   packetLength.writeUInt32BE(
@@ -18,6 +18,7 @@ const makeNotification = (message, type) => {
   return Buffer.concat([packetLength, packetType, message]);
 };
 
+// 유저 좌표 패킷
 export const createLocationPacket = (users) => {
   const protoMessage = getProtoMessages();
   const Location = protoMessage.gameNotification.LocationUpdate;

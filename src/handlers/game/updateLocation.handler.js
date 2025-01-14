@@ -17,6 +17,7 @@ const updateLocationHandler = ({ socket, userId, payload }) => {
       throw new CustomError(ErrorCodes.GAME_NOT_FOUND, '게임 세션을 찾을 수 없습니다.');
     }
 
+    // userId가 undefined로 들어오는 현상 그래서 유저를 찾을 수 없음이 일어남
     console.log('updateLoactionHandler => userId : ', userId, `(x, y) => (${x}, ${y})`);
     const user = gameSession.getUser(userId);
     if (!user) {
