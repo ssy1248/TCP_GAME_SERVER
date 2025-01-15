@@ -22,7 +22,7 @@ export const getUserByDeviceId = (deviceId) => {
   return userSessions.find((user) => user.deviceId === deviceId);
 };
 
-// socket을 통해 유저 조회회
+// socket을 통해 유저 조회
 export const getUserBySocket = (socket) => {
   return userSessions.find((user) => user.socket === socket);
 }

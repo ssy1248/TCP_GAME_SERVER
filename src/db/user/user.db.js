@@ -12,7 +12,7 @@ export const findUserByDeviceId = async (deviceId) => {
   return toCamelCase(rows[0]);
 };
 
-// 유저 생성
+// 유저 생성 -> deviceId를 받은것을 toLowerCase를 사용해야하나?
 export const createUser = async (deviceId) => {
   const id = uuidv4();
   await pools.USER_DB.query(SQL_QUERIES.CREATE_USER, [id, deviceId]);

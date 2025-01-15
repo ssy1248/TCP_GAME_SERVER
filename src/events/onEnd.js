@@ -13,6 +13,6 @@ export const onEnd = (socket) => async () => {
   // 게임 종료 시 유저 위치 저장
   await gameEnd(removedUser);
 
-  // 게임 세션 삭제제
-  getGameSession(config.gameId).removeUser(removedUser.id);
+  // 게임 세션 삭제
+  getGameSession(config.game.gameId).removeUser(removedUser.id);
 };

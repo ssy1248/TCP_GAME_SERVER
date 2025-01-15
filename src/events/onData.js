@@ -53,8 +53,6 @@ export const onData = (socket) => async (data) => {
             const user = getUserByDeviceId(deviceId);
             let userId;
 
-            console.log(`onData PacketTypeNormal user : ${user}`);
-
             if(user) {
               userId = user.id;
 
@@ -65,8 +63,6 @@ export const onData = (socket) => async (data) => {
                 userId,
               );
             }
-
-            console.log(`onData PacketTypeNormal userId : ${userId}`);
 
             const handler = getHandlerById(handlerId);
             await handler({ socket, userId, payload });

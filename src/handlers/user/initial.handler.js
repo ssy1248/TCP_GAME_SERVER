@@ -12,6 +12,8 @@ const initialHandler = async ({ socket, userId, payload }) => {
 
     console.log('[initial] deviceId, payload =>>> ', deviceId, payload);
 
+    //initialHandler에서 deviceId를 Lower이나 Upper로 수정을 해야하나?
+
     //MYSQL.user 테이블에서 deviceId를 통해서 유저 조회
     let user = await findUserByDeviceId(deviceId);
 
