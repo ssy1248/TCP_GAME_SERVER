@@ -12,7 +12,7 @@ const initServer = async () => {
         // proto 파일 로드
         await loadProtos();
         // db 연결 테스트
-        await testAllConnections(pools);
+        //await testAllConnections(pools);
         // 게임 세션 생성
         createGameSession();
     } catch (e) {
