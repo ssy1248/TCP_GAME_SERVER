@@ -46,7 +46,7 @@ class User {
     console.log(`Received ping from user ${this.id} at ${now} with latency ${this.latency}ms`);
   }
 
-  // 위치 계산산
+  // 위치 계산
   calculatePosition(latency) {
     // 이동이 없는 상황
     if(this.x === this.lastX && this.y === this.lastY) {
