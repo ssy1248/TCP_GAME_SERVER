@@ -9,7 +9,7 @@ export const addUser = (socket, userId, deviceId, playerId, latency) => {
   return user;
 };
 
-// 유저 세션에서 유저객체 삭제제
+// 유저 세션에서 유저객체 삭제
 export const removeUser = (socket) => {
   const index = userSessions.findIndex((user) => user.socket === socket);
   if (index !== -1) {

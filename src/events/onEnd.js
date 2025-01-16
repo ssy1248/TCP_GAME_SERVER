@@ -1,7 +1,6 @@
 import { config } from "../config/config.js";
 import { gameEnd } from "../db/user/user.db.js";
 import { getGameSession } from "../session/game.session.js";
-import { gameSessions, userSessions } from "../session/sessions.js";
 import { removeUser } from "../session/user.session.js";
 
 export const onEnd = (socket) => async () => {
