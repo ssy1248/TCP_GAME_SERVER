@@ -90,3 +90,13 @@
 ### 도전 구현 기능
 
 ## DB 연동
+``` txt
+게임이 종료 시 현재의 위치를 db에 전송 : user.db.js
+유저의 좌표를 클래스에 저장 : user.class.js
+```
+
+## Latency를 이용한 추측항법 적용
+``` txt
+서버 계산 : user.class.js의 calculatePosition 함수
+클라 : NetworkManager.cs의 HandleLocationPacket 함수
+```
