@@ -98,5 +98,5 @@
 ## Latency를 이용한 추측항법 적용
 ``` txt
 서버 계산 : user.class.js의 calculatePosition 함수
-클라 : NetworkManager.cs의 HandleLocationPacket 함수
+클라 : NetworkManager.cs의 HandleLocationPacket 함수 / plater.cs의 UpdatePositionFromServer 함수
 ```
